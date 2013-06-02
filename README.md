@@ -3,8 +3,23 @@ Leaflet.Coordinates
 
 Leaflet plugin to view mouse coordinates
 
+*Tested with Leaflet 0.5*
 
+### Demo anyone?
+ToDo
 
-###License 
-This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+### How to use?
+```javascript
+L.control.coordinates({
+	position:"bottomleft", //optional default "bootomright"
+	decimals:2, //optional default 4
+	decimalSeperator:".", //optional default "."
+	labelTemplate:"Latitude: {x} Longitude:{y}" //optional default "Lat: {x} Lng:{y}"
+}).addTo(map);
+```
+
+### Releases
+none yet
+
+### License 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
