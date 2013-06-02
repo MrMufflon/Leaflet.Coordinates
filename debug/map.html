@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet debug page</title>
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
+
+	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet-src.js"></script>
+	<script type="text/javascript" src="../build/deps.js"></script>
+	<script src="includes.js"></script>
+</head>
+<body>
+
+	<div id="map" style="width: 800px; height: 300px; border: 1px solid #ccc"></div>
+
+	<script type="text/javascript">
+		var map = new L.Map('map');
+
+		var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/d4fc77ea4a63471cab2423e66626cbb6/{styleId}/256/{z}/{x}/{y}.png',
+			cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+			cloudmade = new L.TileLayer(cloudmadeUrl, {styleId: 998, attribution: cloudmadeAttribution});
+
+		var bounds = new L.LatLngBounds(new L.LatLng(32, 7), new L.LatLng(50, 10));
+
+		map.addLayer(cloudmade).fitBounds(bounds);
+		L.control.coordinates().addTo(map)
+	</script>
+</body>
+</html>

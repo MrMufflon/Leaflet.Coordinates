@@ -1,0 +1,17 @@
+{
+	"name": "Leaflet.Coordinates",
+	"version": "0.1.0",
+	"description": "Control-plugin for displaying coordinates in Leaflet Javascript Framework",
+	"devDependencies": {
+		"jshint": "~2.1.2",
+		"mocha": "~1.10.0",
+		"karma": "~0.8.5",
+		"uglify-js": "~2.3.6"
+	},
+	"main": "dist/Control.Coordinates.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/MrMufflon/Leaflet.Coordinates.git"
+	},
+	"keywords": ["gis", "map", "sdi", "gdi", "coordinates"]
+}
