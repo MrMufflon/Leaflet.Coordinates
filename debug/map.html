@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet debug page</title>
+	<title>Coordinate viewing test page</title>
 
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
@@ -24,7 +24,13 @@
 		var bounds = new L.LatLngBounds(new L.LatLng(32, 7), new L.LatLng(50, 10));
 
 		map.addLayer(cloudmade).fitBounds(bounds);
-		L.control.coordinates().addTo(map)
+		L.control.coordinates().addTo(map);
+		L.control.coordinates({
+			position:"bottomleft",
+			decimals:2,
+			decimalSeperator:",",
+			labelTemplate:"Latitude: {x} Longitude:{y}"
+		}).addTo(map);
 	</script>
 </body>
 </html>
