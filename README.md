@@ -1,7 +1,8 @@
 Leaflet.Coordinates
 ===================
 
-Leaflet plugin to view mouse coordinates
+### What is this?
+Leaflet plugin to view mouse coordinates. Also the user can change the coordinates and get a marker on that position.
 
 *Tested with Leaflet 0.5*
 
@@ -14,7 +15,9 @@ L.control.coordinates({
 	position:"bottomleft", //optional default "bootomright"
 	decimals:2, //optional default 4
 	decimalSeperator:".", //optional default "."
-	labelTemplate:"Latitude: {x} Longitude:{y}" //optional default "Lat: {x} Lng:{y}"
+	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
+	labelTemplateLng:"Longitude: {x}"" //optional default "Lng: {x}",
+	enableUserInput:true //optional default true
 }).addTo(map);
 ```
 
