@@ -16,7 +16,7 @@ L.control.coordinates({
 	decimals:2, //optional default 4
 	decimalSeperator:".", //optional default "."
 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
-	labelTemplateLng:"Longitude: {x}"" //optional default "Lng: {x}",
+	labelTemplateLng:"Longitude: {x}" //optional default "Lng: {x}",
 	enableUserInput:true //optional default true
 }).addTo(map);
 ```
