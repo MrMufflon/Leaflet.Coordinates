@@ -41,7 +41,10 @@
         <h1>
 <a name="leafletcoordinates" class="anchor" href="#leafletcoordinates"><span class="octicon octicon-link"></span></a>Leaflet.Coordinates</h1>
 
-<p>Leaflet plugin to view mouse coordinates</p>
+<h3>
+<a name="what-is-this" class="anchor" href="#what-is-this"><span class="octicon octicon-link"></span></a>What is this?</h3>
+
+<p>Leaflet plugin to view mouse coordinates. Also the user can change the coordinates and get a marker on that position.</p>
 
 <p><em>Tested with Leaflet 0.5</em></p>
 
@@ -57,7 +60,9 @@
     <span class="nx">position</span><span class="o">:</span><span class="s2">"bottomleft"</span><span class="p">,</span> <span class="c1">//optional default "bootomright"</span>
     <span class="nx">decimals</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="c1">//optional default 4</span>
     <span class="nx">decimalSeperator</span><span class="o">:</span><span class="s2">"."</span><span class="p">,</span> <span class="c1">//optional default "."</span>
-    <span class="nx">labelTemplate</span><span class="o">:</span><span class="s2">"Latitude: {x} Longitude:{y}"</span> <span class="c1">//optional default "Lat: {x} Lng:{y}"</span>
+    <span class="nx">labelTemplateLat</span><span class="o">:</span><span class="s2">"Latitude: {y}"</span><span class="p">,</span> <span class="c1">//optional default "Lat: {y}"</span>
+    <span class="nx">labelTemplateLng</span><span class="o">:</span><span class="s2">"Longitude: {x}"" //optional default "</span><span class="nx">Lng</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="p">}</span><span class="err">"</span><span class="p">,</span>
+    <span class="nx">enableUserInput</span><span class="o">:</span><span class="kc">true</span> <span class="c1">//optional default true</span>
 <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
 </pre></div>
 
