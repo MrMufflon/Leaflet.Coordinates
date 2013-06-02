@@ -1,0 +1,19 @@
+
+.leaflet-control-coordinates {
+	background-color:rgba(255, 255, 255, 0.8);
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	cursor:pointer;
+}
+
+.leaflet-control-coordinates .uiElement {
+	margin:4px;
+}
+.leaflet-control-coordinates .uiElement .labelX {
+	margin-right:4px;
+}
+
+.leaflet-control-coordinates .uiElement.uiHidden{
+	display:none;
+}
