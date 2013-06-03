@@ -27,16 +27,15 @@ L.Control.Coordinates = L.Control.extend({
 
 		//input containers
 		this._inputcontainer = L.DomUtil.create("div", "uiElement input uiHidden", container);
+		L.DomUtil.create("span", "", this._inputcontainer).innerHTML=options.labelTemplateLng.replace("{x}","");
 		this._inputX=this._createInput("inputX", this._inputcontainer);
+		L.DomUtil.create("span", "", this._inputcontainer).innerHTML=options.labelTemplateLat.replace("{y}","");
 		this._inputY=this._createInput("inputY", this._inputcontainer);
 		L.DomEvent.on(this._inputX, 'keyup', this._handleKeypress, this);
 		L.DomEvent.on(this._inputY, 'keyup', this._handleKeypress, this);
 
 		map.on("mousemove", this._update, this);
 		map.on('dragstart', this.collapse, this);
-
-		this._marker = L.marker();
-		this._marker.on("click",this._clearMarker,this);
 
 		map.whenReady(this._update,this);
 
@@ -57,13 +56,16 @@ L.Control.Coordinates = L.Control.extend({
 
 	_clearMarker : function() {
 		this._map.removeLayer(this._marker);
-		this.collapse();
-	},	
+	},
 
 	_handleKeypress : function(e) {
 		switch(e.keyCode)
 		{
 			case 27: //Esc
+				this.collapse();
+			break;
+			case 13: //Enter
+				this._handleSubmit();
 				this.collapse();
 			break;
 			default://All keys
@@ -75,7 +77,11 @@ L.Control.Coordinates = L.Control.extend({
 	_handleSubmit : function()  {
 		var x = this._createValidInput(this._inputX.value);
 		var y = this._createValidInput(this._inputY.value);
-		if (x!=undefined&&y!=undefined){
+		if (x!==undefined&&y!==undefined){
+			if (!this._marker){
+				var marker = this._marker = L.marker();
+				marker.on("click",this._clearMarker,this);
+			}
 			this._marker.setLatLng(new L.LatLng(y, x));
 			this._marker.addTo(this._map);
 		}
@@ -109,13 +115,40 @@ L.Control.Coordinates = L.Control.extend({
 	},
 
 	collapse:function() {
-		this._showsCoordinates=true;
+		if (!this._showsCoordinates) {
+			this._showsCoordinates=true;
+			var opts = this.options;
+			L.DomEvent.addListener(this._container, "click",this._switchUI,this);
+			L.DomEvent.removeListener(this._container,"mousemove",L.DomEvent.stop);
 
-		L.DomEvent.addListener(this._container, "click",this._switchUI,this);
-		L.DomEvent.removeListener(this._container,"mousemove",L.DomEvent.stop);
+			L.DomUtil.addClass(this._inputcontainer, "uiHidden");
+			L.DomUtil.removeClass(this._labelcontainer, "uiHidden");
 
-		L.DomUtil.addClass(this._inputcontainer, "uiHidden");
-		L.DomUtil.removeClass(this._labelcontainer, "uiHidden");
+			if(this._marker) {
+				var m = L.marker(),
+				ll=this._marker.getLatLng();
+				m.setLatLng(ll);
+
+				var container = L.DomUtil.create("div", "");
+				var label=L.DomUtil.create("div", "", container);
+				label.innerHTML = labelX = L.Util.template(opts.labelTemplateLng, {
+					x:ll.lng
+				}) +" "+ L.Util.template(opts.labelTemplateLat, {
+					y:ll.lat
+				});
+
+				var close=L.DomUtil.create("a", "", container);
+				close.innerHTML="Remove";
+				close.href="#";
+				L.DomEvent.addListener(close, "click",function(){
+					this._map.removeLayer(m);
+				},this);
+				m.bindPopup(container);
+				m.addTo(this._map);
+				this._map.removeLayer(this._marker);
+				this._marker=null;
+			}
+		}
 	},
 
 	_switchUI : function(evt){
