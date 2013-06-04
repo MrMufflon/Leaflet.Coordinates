@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet.Coordinates Demo Page</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	 <style>
+	   html, body, #map {
+	      height:100%;
+	      width:100%;
+	      padding:0px;
+	      margin:0px;
+	   } 
+	</style>
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
+
+	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.1.min.js"></script>
+	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.1.css"/>
+</head>
+<body>
+
+	<div id="map"></div>
+
+	<script type="text/javascript">
+		var map = new L.Map('map');
+
+		var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg',
+			attr ='Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data {attribution.OpenStreetMap}',
+			service = new L.TileLayer(url, {subdomains:"1234",attribution: attr});
+
+		var bounds = new L.LatLngBounds(new L.LatLng(40, 7), new L.LatLng(55, 10));
+
+		map.addLayer(service).fitBounds(bounds);
+		//add standard controls
+		L.control.coordinates().addTo(map);
+		//add configured controls
+		L.control.coordinates({
+			position:"bottomleft",
+			decimals:2,
+			decimalSeperator:",",
+			labelTemplateLat:"Latitude: {y}",
+			labelTemplateLng:"Longitude: {x}"
+		}).addTo(map);
+	</script>
+</body>
+</html>
