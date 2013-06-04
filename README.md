@@ -7,7 +7,7 @@ Leaflet plugin to view mouse coordinates. Also the user can change the coordinat
 *Tested with Leaflet 0.5*
 
 ### Demo anyone?
-<a href"mrmufflon.github.io/Leaflet.Coordinates/examples/demo.html" target="_blank">Have a look</a>
+<a href"http://mrmufflon.github.io/Leaflet.Coordinates/examples/demo.html" target="_blank">Have a look</a>
 
 ### How to use?
 ```javascript
