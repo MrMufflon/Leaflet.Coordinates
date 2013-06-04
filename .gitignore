@@ -215,3 +215,5 @@ pip-log.txt
 
 #Node
 node_modules
+build
+debugsrc
