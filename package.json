@@ -1,6 +1,6 @@
 {
   "name": "Leaflet.Coordinates",
-  "version": "0.1.1",
+  "version": "0.1.2-SNAPSHOT",
   "description": "A Leaflet plugin to view coordinates",
   "devDependencies": {
     "grunt": "~0.4.1",
