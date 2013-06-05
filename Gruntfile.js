@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     },
     concat: {
       options: {
-        separator: ';'
+        separator: ''
       },
       dist: {
         src: ['src/**/*.js'],
@@ -39,7 +39,19 @@ module.exports = function(grunt) {
         src: ['*.css', '!*.min.css'],
         dest: 'dist/'
       }
+    },
+    jshint: {
+    // define the files to lint
+    files: ['gruntfile.js', 'src/**/*.js'],
+    // configure JSHint (documented at http://www.jshint.com/docs/)
+    options: {
+        // more options here if you want to override JSHint defaults
+      globals: {
+        console: true,
+        module: true
+      }
     }
+}
  
   });
 
@@ -47,8 +59,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean','concat','uglify','cssmin']);
+  grunt.registerTask('default', ['clean','jshint','concat','uglify','cssmin']);
 
 };
