@@ -27,6 +27,7 @@ L.control.coordinates({
 ```
 
 ### Releases
+- [0.1.2](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.2)
 - [0.1.1](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.1)
 - [0.1.0](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.0)
 
