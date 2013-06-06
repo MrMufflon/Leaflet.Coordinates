@@ -16,9 +16,20 @@
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+      <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
+
+      <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+      <script type="text/javascript" src="dist/Leaflet.Coordinates-0.1.2.min.js"></script>
+      <link rel="stylesheet" href="dist/Leaflet.Coordinates-0.1.2.css"/>
+      <!--[if lte IE 8]><link rel="stylesheet" href="dist/Leaflet.Coordinates-0.1.2.ie.css" /><![endif]-->
+
   </head>
   <body>
-      <div id="header">
+
+    <a href="https://github.com/MrMufflon"><img style="position: fixed; top: 0; right: 0; border: 0;z-index:1501;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+      <div id="header" style="z-index:1500;">
         <nav>
           <li class="fork"><a href="https://github.com/MrMufflon/Leaflet.Coordinates">View On GitHub</a></li>
           <li class="downloads"><a href="https://github.com/MrMufflon/Leaflet.Coordinates/zipball/master">ZIP</a></li>
@@ -48,35 +59,38 @@
 
 <p><em>Tested with Leaflet 0.5</em></p>
 
-<p><img src="http://mrmufflon.github.io/Leaflet.Coordinates/images/screen_1.png"></p>
+<div id="map" style="width:100%;height:300px;color:black;"></div>
+<script type="text/javascript">
+    var map = new L.Map('map');
 
-<p><img src="http://mrmufflon.github.io/Leaflet.Coordinates/images/screen_2.png"></p>
+    var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg',
+      attr ='Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data {attribution.OpenStreetMap}',
+      service = new L.TileLayer(url, {subdomains:"1234",attribution: attr});
+
+    var bounds = new L.LatLngBounds(new L.LatLng(40, 7), new L.LatLng(55, 10));
+
+    map.addLayer(service).fitBounds(bounds);
+    //add standard controls
+    L.control.coordinates().addTo(map);
+    //add configured controls
+    L.control.coordinates({
+      position:"bottomleft",
+      decimals:2,
+      decimalSeperator:",",
+      labelTemplateLat:"Latitude: {y}",
+      labelTemplateLng:"Longitude: {x}"
+    }).addTo(map);
+    L.control.coordinates({
+      position:"topright",
+      useDMS:true,
+      labelTemplateLat:"N {y}",
+      labelTemplateLng:"E {x}"
+    }).addTo(map);
+  </script>
+
+<p><a href="http://mrmufflon.github.io/Leaflet.Coordinates/examples/demo.html">Have a look at the demo page</a></p>
 
 <h3>
-<a name="demo-anyone" class="anchor" href="#demo-anyone"><span class="octicon octicon-link"></span></a>Demo anyone?</h3>
-
-<p><a href="http://mrmufflon.github.io/Leaflet.Coordinates/examples/demo.html">Have a look</a></p>
-
-<h3>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use?</h3>
-
-<div class="highlight"><pre><span class="nx">L</span><span class="p">.</span><span class="nx">control</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">({</span>
-    <span class="nx">position</span><span class="o">:</span><span class="s2">"bottomleft"</span><span class="p">,</span> <span class="c1">//optional default "bootomright"</span>
-    <span class="nx">decimals</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="c1">//optional default 4</span>
-    <span class="nx">decimalSeperator</span><span class="o">:</span><span class="s2">"."</span><span class="p">,</span> <span class="c1">//optional default "."</span>
-    <span class="nx">labelTemplateLat</span><span class="o">:</span><span class="s2">"Latitude: {y}"</span><span class="p">,</span> <span class="c1">//optional default "Lat: {y}"</span>
-    <span class="nx">labelTemplateLng</span><span class="o">:</span><span class="s2">"Longitude: {x}"</span> <span class="c1">//optional default "Lng: {x}",</span>
-    <span class="nx">enableUserInput</span><span class="o">:</span><span class="kc">true</span> <span class="c1">//optional default true</span>
-<span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
-</pre></div>
-
-<h3>
-<a name="releases" class="anchor" href="#releases"><span class="octicon octicon-link"></span></a>Releases</h3>
-
-<ul>
-<li><a href="https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.1">0.1.1</a></li>
-<li><a href="https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.0">0.1.0</a></li>
-</ul><h3>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
 
 <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</p>
