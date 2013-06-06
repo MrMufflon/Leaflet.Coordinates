@@ -30,7 +30,8 @@ module.exports = function(grunt) {
     cssmin: {
       combine: {
         files: {
-          'dist/<%= pkg.name %>-<%= pkg.version%>.css': ['src/Control.Coordinates.css']
+          'dist/<%= pkg.name %>-<%= pkg.version%>.css': ['src/Control.Coordinates.css'],
+          'dist/<%= pkg.name %>-<%= pkg.version%>.ie.css': ['src/Control.Coordinates.ie.css']
         }
       },
       minify: {

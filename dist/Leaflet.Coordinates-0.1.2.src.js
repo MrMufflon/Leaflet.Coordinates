@@ -11,7 +11,8 @@ L.Control.Coordinates = L.Control.extend({
 		labelTemplateLng:"Lng: {x}",
 		labelFormatterLat:undefined,
 		labelFormatterLng:undefined,
-		enableUserInput:true
+		enableUserInput:true,
+		useDMS:false
 	},
 
 	onAdd: function (map) {
@@ -108,17 +109,27 @@ L.Control.Coordinates = L.Control.extend({
 			x=opts.labelFormatterLng(ll.lng);
 		}else{
 			x=L.Util.template(opts.labelTemplateLng, {
-				x:L.NumberFormatter.round(ll.lng,opts.decimals, opts.decimalSeperator)
+				x:this._getNumber(ll.lng,opts)
 			});
 		}
 		if (opts.labelFormatterLat) {
 			y=opts.labelFormatterLng(ll.lat);
 		} else {
 			y=L.Util.template(opts.labelTemplateLat, {
-				y:L.NumberFormatter.round(ll.lat,opts.decimals, opts.decimalSeperator)
+				y:this._getNumber(ll.lat,opts)
 			});
 		}
 		return x+" "+y;
+	},
+
+	_getNumber : function(n,opts){
+		var res;
+		if (opts.useDMS){
+			res=L.NumberFormatter.toDMS(n);
+		}else {
+			res=L.NumberFormatter.round(n,opts.decimals, opts.decimalSeperator);
+		}
+		return res;
 	},
 
 	collapse:function() {
@@ -210,6 +221,29 @@ L.Map.addInitHook(function () {
 			res = numbers.join(sep||".");
 		}
 		return res;
+	},
+
+	toDMS : function (deg) {
+		var d = Math.floor (deg);
+		var minfloat = (deg-d)*60;
+		var m = Math.floor(minfloat);
+		var secfloat = (minfloat-m)*60;
+		var s = Math.round(secfloat);
+		if (s==60) {
+			m++;
+			s="00";
+		}
+		if (m==60) {
+			d++;
+			m="00";
+		}
+		if(s<10) {
+			s="0"+s;
+		}
+		if(m<10){
+			m="0"+m;
+		}
+		return ("" + d + "&deg; " + m + "' " + s + "''");
 	},
 
 	createValidNumber:function(num,sep){

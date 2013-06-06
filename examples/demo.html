@@ -16,8 +16,9 @@
 	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
 
 	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.1.min.js"></script>
-	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.1.css"/>
+	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.2.min.js"></script>
+	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.2.css"/>
+	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.2.ie.css" /><![endif]-->
 </head>
 <body>
 
@@ -42,6 +43,12 @@
 			decimalSeperator:",",
 			labelTemplateLat:"Latitude: {y}",
 			labelTemplateLng:"Longitude: {x}"
+		}).addTo(map);
+		L.control.coordinates({
+			position:"topright",
+			useDMS:true,
+			labelTemplateLat:"N {y}",
+			labelTemplateLng:"E {x}"
 		}).addTo(map);
 	</script>
 </body>
