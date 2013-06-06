@@ -155,9 +155,17 @@ L.Control.Coordinates = L.Control.extend({
 				var close=L.DomUtil.create("a", "", container);
 				close.innerHTML="Remove";
 				close.href="#";
-				L.DomEvent.addListener(close, "click",function(){
-					this._map.removeLayer(m);
-				},this);
+				var stop = L.DomEvent.stopPropagation;
+
+				L.DomEvent
+					.on(close, 'click', stop)
+					.on(close, 'mousedown', stop)
+					.on(close, 'dblclick', stop)
+					.on(close, 'click', L.DomEvent.preventDefault)
+					.on(close, 'click', function(){
+						this._map.removeLayer(m);
+					},this);
+
 				m.bindPopup(container);
 				m.addTo(this._map);
 				this._map.removeLayer(this._marker);
