@@ -93,7 +93,7 @@ L.Control.Coordinates = L.Control.extend({
 	expand:function() {
 		this._showsCoordinates=false;
 
-		map.off("mousemove", this._update, this);
+		this._map.off("mousemove", this._update, this);
 
 		L.DomEvent.addListener(this._container,"mousemove",L.DomEvent.stop);
 		L.DomEvent.removeListener(this._container, "click",this._switchUI,this);
@@ -134,7 +134,7 @@ L.Control.Coordinates = L.Control.extend({
 
 	collapse:function() {
 		if (!this._showsCoordinates) {
-			map.on("mousemove", this._update, this);
+			this._map.on("mousemove", this._update, this);
 			this._showsCoordinates=true;
 			var opts = this.options;
 			L.DomEvent.addListener(this._container, "click",this._switchUI,this);
