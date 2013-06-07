@@ -2,7 +2,7 @@ Leaflet.Coordinates
 ===================
 
 ### What is this?
-A Leaflet plugin to view mouse coordinates. Also the user can change the coordinates and get a marker on that position viewing the coordinates.
+A [Leaflet](https://github.com/Leaflet/Leaflet) plugin to view mouse coordinates. Also the user can change the coordinates and get a marker on that position viewing the coordinates.
 
 *Tested with Leaflet 0.5*
 
