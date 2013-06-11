@@ -135,7 +135,7 @@ L.Control.Coordinates = L.Control.extend({
 			});
 		}
 		if (opts.labelFormatterLat) {
-			y = opts.labelFormatterLng(ll.lat);
+			y = opts.labelFormatterLat(ll.lat);
 		} else {
 			y = L.Util.template(opts.labelTemplateLat, {
 				y: this._getNumber(ll.lat, opts)
