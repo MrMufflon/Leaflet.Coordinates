@@ -230,6 +230,7 @@ L.Control.Coordinates = L.Control.extend({
 		var pos = evt.latlng,
 			opts = this.options;
 		if (pos) {
+			pos = pos.wrap();
 			this._currentPos = pos;
 			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeperator);
 			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
