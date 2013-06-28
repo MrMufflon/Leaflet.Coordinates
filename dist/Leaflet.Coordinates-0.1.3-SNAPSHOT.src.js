@@ -135,7 +135,7 @@ L.Control.Coordinates = L.Control.extend({
 			});
 		}
 		if (opts.labelFormatterLat) {
-			y = opts.labelFormatterLng(ll.lat);
+			y = opts.labelFormatterLat(ll.lat);
 		} else {
 			y = L.Util.template(opts.labelTemplateLat, {
 				y: this._getNumber(ll.lat, opts)
@@ -230,6 +230,7 @@ L.Control.Coordinates = L.Control.extend({
 		var pos = evt.latlng,
 			opts = this.options;
 		if (pos) {
+			pos = pos.wrap();
 			this._currentPos = pos;
 			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeperator);
 			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
