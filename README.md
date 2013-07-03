@@ -4,7 +4,7 @@ Leaflet.Coordinates
 ### What is this?
 A [Leaflet](https://github.com/Leaflet/Leaflet) plugin to view mouse coordinates. Also the user can change the coordinates and get a marker on that position viewing the coordinates.
 
-*Tested with Leaflet 0.5*
+*Tested with Leaflet 0.5+*
 
 <img src="http://mrmufflon.github.io/Leaflet.Coordinates/images/screen_1.png"/>
 
@@ -21,12 +21,14 @@ L.control.coordinates({
 	decimalSeperator:".", //optional default "."
 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
-	enableUserInput:true //optional default true,
-	useDMS:false //optional default false
+	enableUserInput:true, //optional default true
+	useDMS:false, //optional default false
+	useLatLngOrder: true //ordering of labels, default false-> lng-lat
 }).addTo(map);
 ```
 
 ### Releases
+- [0.1.3](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.3)
 - [0.1.2](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.2)
 - [0.1.1](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.1)
 - [0.1.0](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.0)
