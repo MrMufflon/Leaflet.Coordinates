@@ -20,7 +20,9 @@ L.Control.Coordinates = L.Control.extend({
 		//use Degree-Minute-Second
 		useDMS: false,
 		//if true lat-lng instead of lng-lat label ordering is used
-		useLatLngOrder: false
+		useLatLngOrder: false,
+		//if true user given coordinates are centered directly
+		centerUserCoordinates:false
 	},
 
 	onAdd: function(map) {
@@ -114,8 +116,12 @@ L.Control.Coordinates = L.Control.extend({
 				marker = this._marker = L.marker();
 				marker.on("click", this._clearMarker, this);
 			}
-			marker.setLatLng(new L.LatLng(y, x));
+			var ll=new L.LatLng(y, x);
+			marker.setLatLng(ll);
 			marker.addTo(this._map);
+			if (this.options.centerUserCoordinates){
+				this._map.setView(ll,this._map.getZoom());
+			}
 		}
 	},
 
