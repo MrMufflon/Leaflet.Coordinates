@@ -146,6 +146,9 @@ L.Control.Coordinates = L.Control.extend({
 	_createCoordinateLabel: function(ll) {
 		var opts = this.options,
 			x, y;
+        if(opts.customLabelFcn) {
+            return opts.customLabelFcn(ll, opts);
+        }
 		if (opts.labelFormatterLng) {
 			x = opts.labelFormatterLng(ll.lng);
 		} else {
