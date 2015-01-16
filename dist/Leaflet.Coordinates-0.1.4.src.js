@@ -2,6 +2,7 @@
  * L.Control.Coordinates is used for displaying current mouse coordinates on the map.
  */
 
+
 L.Control.Coordinates = L.Control.extend({
 	options: {
 		position: 'bottomright',
@@ -22,7 +23,8 @@ L.Control.Coordinates = L.Control.extend({
 		//if true lat-lng instead of lng-lat label ordering is used
 		useLatLngOrder: false,
 		//if true user given coordinates are centered directly
-		centerUserCoordinates:false
+		centerUserCoordinates:false,
+        bypassfunction:bypass=function(lat,lng) {return {'lat':lat,'lng':lng};}
 	},
 
 	onAdd: function(map) {
@@ -254,8 +256,9 @@ L.Control.Coordinates = L.Control.extend({
 		if (pos) {
 			pos = pos.wrap();
 			this._currentPos = pos;
-			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeperator);
-			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
+            var bret=opts.bypassfunction(pos.y,pos.x);
+			this._inputY.value = L.NumberFormatter.round(bret.lat, opts.decimals, opts.decimalSeperator);
+			this._inputX.value = L.NumberFormatter.round(bret.lng, opts.decimals, opts.decimalSeperator);
 			this._label.innerHTML = this._createCoordinateLabel(pos);
 		}
 	}
@@ -277,7 +280,8 @@ L.Map.addInitHook(function() {
 		this.coordinateControl = new L.Control.Coordinates();
 		this.addControl(this.coordinateControl);
 	}
-});L.NumberFormatter = {
+});
+L.NumberFormatter = {
 	round: function (num,dec,sep) {
 		var res = L.Util.formatNum(num,dec)+"",
 		numbers=res.split(".");

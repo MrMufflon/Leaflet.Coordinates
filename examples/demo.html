@@ -16,8 +16,8 @@
 	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.ie.css" /><![endif]-->
 
 	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
-	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.3.min.js"></script>
-	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.3.css"/>
+	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.4.src.js"></script>
+	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.4.css"/>
 	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.3.ie.css" /><![endif]-->
 </head>
 <body>
@@ -32,7 +32,10 @@
 			service = new L.TileLayer(url, {subdomains:"1234",attribution: attr});
 
 		var bounds = new L.LatLngBounds(new L.LatLng(40, 7), new L.LatLng(55, 10));
+        b2=function(lat,lng){
 
+            return {'lat':lat*2,'lng':lng*2};
+        }
 		map.addLayer(service).fitBounds(bounds);
 		//add standard controls
 		L.control.coordinates().addTo(map);
@@ -49,7 +52,8 @@
 			useDMS:true,
 			labelTemplateLat:"N {y}",
 			labelTemplateLng:"E {x}",
-			useLatLngOrder:true
+			useLatLngOrder:true,
+			bypassfunction:b2
 		}).addTo(map);
 	</script>
 </body>
