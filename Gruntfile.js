@@ -51,6 +51,21 @@ module.exports = function(grunt) {
         src: ['src/**/*.css']
       }
     },
+    jasmine: {
+      pivotal: {
+        src: [
+          'src/**/*.js'
+        ],
+        options: {
+          specs: 'spec/*Spec.js',
+          helpers: 'spec/*Helper.js',
+          vendor: [
+            'http://cdn.leafletjs.com/leaflet-0.5.1/leaflet-src.js'
+          ],
+          '--local-to-remote-url-access': true
+        }
+      }
+    },
     jshint: {
       // define the files to lint
       files: ['src/**/*.js'],
@@ -60,6 +75,14 @@ module.exports = function(grunt) {
         globals: {
           console: true,
           module: true
+        }
+      }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: 'spec'
         }
       }
     }
@@ -72,8 +95,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-csslint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'jshint', 'csslint', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'jshint', 'connect', 'jasmine', 'csslint', 'concat', 'uglify', 'cssmin']);
+
+  grunt.registerTask('test', ['connect', 'jasmine']);
 
 };
