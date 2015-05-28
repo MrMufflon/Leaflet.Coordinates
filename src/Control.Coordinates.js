@@ -22,7 +22,11 @@ L.Control.Coordinates = L.Control.extend({
 		//if true lat-lng instead of lng-lat label ordering is used
 		useLatLngOrder: false,
 		//if true user given coordinates are centered directly
-		centerUserCoordinates:false
+		centerUserCoordinates:false,
+		//leaflet marker type
+		markerType: L.marker,
+		//leaflet marker properties
+		markerProps: {}
 	},
 
 	onAdd: function(map) {
@@ -113,7 +117,7 @@ L.Control.Coordinates = L.Control.extend({
 		if (x !== undefined && y !== undefined) {
 			var marker = this._marker;
 			if (!marker) {
-				marker = this._marker = L.marker();
+				marker = this._marker = this._createNewMarker();
 				marker.on("click", this._clearMarker, this);
 			}
 			var ll=new L.LatLng(y, x);
@@ -195,7 +199,7 @@ L.Control.Coordinates = L.Control.extend({
 			L.DomUtil.removeClass(this._labelcontainer, "uiHidden");
 
 			if (this._marker) {
-				var m = L.marker(),
+				var m = this._createNewMarker(),
 					ll = this._marker.getLatLng();
 				m.setLatLng(ll);
 
@@ -258,11 +262,15 @@ L.Control.Coordinates = L.Control.extend({
 			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
 			this._label.innerHTML = this._createCoordinateLabel(pos);
 		}
+	},
+
+	_createNewMarker: function() {
+		return this.options.markerType(null, this.options.markerProps);
 	}
 
 });
 
-//construcotr registration
+//constructor registration
 L.control.coordinates = function(options) {
 	return new L.Control.Coordinates(options);
 };

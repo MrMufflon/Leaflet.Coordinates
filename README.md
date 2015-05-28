@@ -23,7 +23,9 @@ L.control.coordinates({
 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
 	enableUserInput:true, //optional default true
 	useDMS:false, //optional default false
-	useLatLngOrder: true //ordering of labels, default false-> lng-lat
+	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+	markerType: L.marker, //optional default L.marker
+	markerProps: {} //optional default {}
 }).addTo(map);
 ```
 
