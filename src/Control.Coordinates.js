@@ -37,7 +37,7 @@ L.Control.Coordinates = L.Control.extend({
 			options = this.options;
 
 		//label containers
-		this._labelcontainer = L.DomUtil.create("div", "uiElement labelElement", container);
+		this._labelcontainer = L.DomUtil.create("div", "uiElement label", container);
 		this._label = L.DomUtil.create("span", "labelFirst", this._labelcontainer);
 
 

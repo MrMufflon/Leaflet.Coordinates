@@ -22,3 +22,11 @@
 .leaflet-control-coordinates .uiHidden{
 	display:none;
 }
+
+.leaflet-control-coordinates .uiElement.label {
+	color:inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	padding: 0;
+	display: inherit;
+}
