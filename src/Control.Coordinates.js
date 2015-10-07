@@ -12,7 +12,7 @@ L.Control.Coordinates = L.Control.extend({
 		//label templates for usage if no labelFormatter function is defined
 		labelTemplateLat: "Lat: {y}",
 		labelTemplateLng: "Lng: {x}",
-		//label formatter functions 
+		//label formatter functions
 		labelFormatterLat: undefined,
 		labelFormatterLng: undefined,
 		//switch on/off input fields on click
@@ -22,7 +22,7 @@ L.Control.Coordinates = L.Control.extend({
 		//if true lat-lng instead of lng-lat label ordering is used
 		useLatLngOrder: false,
 		//if true user given coordinates are centered directly
-		centerUserCoordinates:false,
+		centerUserCoordinates: false,
 		//leaflet marker type
 		markerType: L.marker,
 		//leaflet marker properties
@@ -37,7 +37,7 @@ L.Control.Coordinates = L.Control.extend({
 			options = this.options;
 
 		//label containers
-		this._labelcontainer = L.DomUtil.create("div", "uiElement label", container);
+		this._labelcontainer = L.DomUtil.create("div", "uiElement labelElement", container);
 		this._label = L.DomUtil.create("span", "labelFirst", this._labelcontainer);
 
 
@@ -120,11 +120,11 @@ L.Control.Coordinates = L.Control.extend({
 				marker = this._marker = this._createNewMarker();
 				marker.on("click", this._clearMarker, this);
 			}
-			var ll=new L.LatLng(y, x);
+			var ll = new L.LatLng(y, x);
 			marker.setLatLng(ll);
 			marker.addTo(this._map);
-			if (this.options.centerUserCoordinates){
-				this._map.setView(ll,this._map.getZoom());
+			if (this.options.centerUserCoordinates) {
+				this._map.setView(ll, this._map.getZoom());
 			}
 		}
 	},
@@ -218,8 +218,8 @@ L.Control.Coordinates = L.Control.extend({
 					.on(close, 'dblclick', stop)
 					.on(close, 'click', L.DomEvent.preventDefault)
 					.on(close, 'click', function() {
-					this._map.removeLayer(m);
-				}, this);
+						this._map.removeLayer(m);
+					}, this);
 
 				m.bindPopup(container);
 				m.addTo(this._map);
