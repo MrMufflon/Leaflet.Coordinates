@@ -1,0 +1,29 @@
+{
+    "name": "Leaflet.Coordinates",
+    "version": "0.1.5",
+    "homepage": "https://github.com/MrMufflon/Leaflet.Coordinates",
+    "authors": [
+        "MrMufflon"
+    ],
+    "description": "A Leaflet plugin to view coordinates",
+    "main": [
+        "dist/Leaflet.Coordinates-0.1.5.min.js",
+        "dist/Leaflet.Coordinates-0.1.5.css"
+    ],
+    "keywords": [
+        "Leaflet",
+        "Coorniates",
+        "map"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "leaflet-dist": "0.7.x"
+    }
+}
