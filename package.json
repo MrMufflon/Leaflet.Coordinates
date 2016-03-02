@@ -1,5 +1,5 @@
 {
-    "name": "Leaflet.Coordinates",
+    "name": "leaflet.coordinates",
     "version": "0.1.5",
     "description": "A Leaflet plugin to view coordinates",
     "devDependencies": {
