@@ -17,6 +17,7 @@
 
 	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
 	<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.3.min.js"></script>
+	<script type="text/javascript" src="http://openlocation.org/geohash/geohash-js/geohash.js"></script>
 	<link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.3.css"/>
 	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/Leaflet.Coordinates-0.1.3.ie.css" /><![endif]-->
 </head>
@@ -51,6 +52,13 @@
 			labelTemplateLng:"E {x}",
 			useLatLngOrder:true
 		}).addTo(map);
+		L.control.coordinates({
+		    position:"bottomleft",
+		    enableUserInput:false,
+		    customLabelFcn: function(latLonObj, opts) {
+		        return "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng);
+		    }
+		}).addTo(me.map);
 	</script>
 </body>
 </html>
