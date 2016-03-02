@@ -150,7 +150,10 @@ L.Control.Coordinates = L.Control.extend({
 	_createCoordinateLabel: function(ll) {
 		var opts = this.options,
 			x, y;
-		if (opts.labelFormatterLng) {
+		if (opts.customLabelFcn) {
+			return opts.customLabelFcn(ll, opts);
+		}
+		if (opts.labelLng) {
 			x = opts.labelFormatterLng(ll.lng);
 		} else {
 			x = L.Util.template(opts.labelTemplateLng, {
@@ -205,7 +208,7 @@ L.Control.Coordinates = L.Control.extend({
 
 				var container = L.DomUtil.create("div", "");
 				var label = L.DomUtil.create("div", "", container);
-				label.innerHTML = this._createCoordinateLabel(ll);
+				label.innerHTML = this._ordinateLabel(ll);
 
 				var close = L.DomUtil.create("a", "", container);
 				close.innerHTML = "Remove";
