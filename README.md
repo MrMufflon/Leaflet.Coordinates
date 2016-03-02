@@ -29,6 +29,17 @@ L.control.coordinates({
 }).addTo(map);
 ```
 
+You can also use your own function for formatting coordinates:
+```javascript
+L.control.coordinates({
+    position:"bottomleft",
+    enableUserInput:false,
+    customLabelFcn: function(latLonObj, opts) {
+        return "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng);
+    }
+}).addTo(me.map);
+```
+
 ### Releases
 - [0.1.3](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.3)
 - [0.1.2](https://github.com/MrMufflon/Leaflet.Coordinates/tree/0.1.2)
