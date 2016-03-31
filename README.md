@@ -22,6 +22,8 @@ L.control.coordinates({
 	labelTemplateLat:"Latitude: {y}", //optional default "Lat: {y}"
 	labelTemplateLng:"Longitude: {x}", //optional default "Lng: {x}"
 	enableUserInput:true, //optional default true
+	centerUserCoordinates: false, 	//if true user given coordinates are centered directly
+	centerOnKeypress: false, //if true, map re-centers with every keystroke inside input instead of only on submit
 	useDMS:false, //optional default false
 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
 	markerType: L.marker, //optional default L.marker
