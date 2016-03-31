@@ -7,8 +7,8 @@ L.Control.Coordinates = L.Control.extend({
 		position: 'bottomright',
 		//decimals used if not using DMS or labelFormatter functions
 		decimals: 4,
-		//decimalseperator used if not using DMS or labelFormatter functions
-		decimalSeperator: ".",
+		//decimalSeparator used if not using DMS or labelFormatter functions
+		decimalSeparator: ".",
 		//label templates for usage if no labelFormatter function is defined
 		labelTemplateLat: "Lat: {y}",
 		labelTemplateLng: "Lng: {x}",
@@ -23,6 +23,8 @@ L.Control.Coordinates = L.Control.extend({
 		useLatLngOrder: false,
 		//if true user given coordinates are centered directly
 		centerUserCoordinates: false,
+		//if true, map will center every time the user changes a digit of the coordinates
+		centerOnKeypress: false,
 		//leaflet marker type
 		markerType: L.marker,
 		//leaflet marker properties
@@ -103,7 +105,9 @@ L.Control.Coordinates = L.Control.extend({
 				this.collapse();
 				break;
 			default: //All keys
-				this._handleSubmit();
+				if (this.options.centerOnKeypress) {
+					this._handleSubmit();
+				}
 				break;
 		}
 	},
@@ -112,8 +116,8 @@ L.Control.Coordinates = L.Control.extend({
 	 *	Called on each keyup except ESC
 	 */
 	_handleSubmit: function() {
-		var x = L.NumberFormatter.createValidNumber(this._inputX.value, this.options.decimalSeperator);
-		var y = L.NumberFormatter.createValidNumber(this._inputY.value, this.options.decimalSeperator);
+		var x = L.NumberFormatter.createValidNumber(this._inputX.value, this.options.decimalSeparator);
+		var y = L.NumberFormatter.createValidNumber(this._inputY.value, this.options.decimalSeparator);
 		if (x !== undefined && y !== undefined) {
 			var marker = this._marker;
 			if (!marker) {
@@ -181,7 +185,7 @@ L.Control.Coordinates = L.Control.extend({
 		if (opts.useDMS) {
 			res = L.NumberFormatter.toDMS(n);
 		} else {
-			res = L.NumberFormatter.round(n, opts.decimals, opts.decimalSeperator);
+			res = L.NumberFormatter.round(n, opts.decimals, opts.decimalSeparator);
 		}
 		return res;
 	},
@@ -208,7 +212,7 @@ L.Control.Coordinates = L.Control.extend({
 
 				var container = L.DomUtil.create("div", "");
 				var label = L.DomUtil.create("div", "", container);
-				label.innerHTML = this._ordinateLabel(ll);
+				label.innerHTML = this._createCoordinateLabel(ll);
 
 				var close = L.DomUtil.create("a", "", container);
 				close.innerHTML = "Remove";
@@ -261,8 +265,8 @@ L.Control.Coordinates = L.Control.extend({
 		if (pos) {
 			pos = pos.wrap();
 			this._currentPos = pos;
-			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeperator);
-			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
+			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeparator);
+			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeparator);
 			this._label.innerHTML = this._createCoordinateLabel(pos);
 		}
 	},
