@@ -153,7 +153,7 @@ L.Control.Coordinates = L.Control.extend({
 		if (opts.customLabelFcn) {
 			return opts.customLabelFcn(ll, opts);
 		}
-		if (opts.labelFormatterLat) {
+		if (opts.labelFormatterLng) {
 			x = opts.labelFormatterLng(ll.lng);
 		} else {
 			x = L.Util.template(opts.labelTemplateLng, {
