@@ -26,8 +26,8 @@ L.control.coordinates({
 	useLatLngOrder: true, //ordering of labels, default false-> lng-lat
 	markerType: L.marker, //optional default L.marker
 	markerProps: {}, //optional default {},
-	labelFormatterLng : funtion(lng){return lng+" lng"}, //optional default none,
-	labelFormatterLat : funtion(lat){return lat+" lat"}, //optional default none
+	labelFormatterLng : function(lng){return lng+" lng"}, //optional default none,
+	labelFormatterLat : function(lat){return lat+" lat"}, //optional default none
 	customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
 }).addTo(map);
 ```
