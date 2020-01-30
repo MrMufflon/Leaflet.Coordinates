@@ -19,6 +19,7 @@
         "type": "git",
         "url": "https://github.com/MrMufflon/Leaflet.Coordinates.git"
     },
+    "main": "dist/Leaflet.Coordinates-0.1.5.src.js",
     "keywords": [
         "gis",
         "coordinates",
