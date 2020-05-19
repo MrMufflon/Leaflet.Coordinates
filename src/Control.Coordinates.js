@@ -43,20 +43,42 @@ L.Control.Coordinates = L.Control.extend({
 
 		//input containers
 		this._inputcontainer = L.DomUtil.create("div", "uiElement input uiHidden", container);
-		var xSpan, ySpan;
+		var span1 = L.DomUtil.create("span", "", this._inputcontainer);
 		if (options.useLatLngOrder) {
-			ySpan = L.DomUtil.create("span", "", this._inputcontainer);
+			var y_format_i = options.labelTemplateLat.indexOf("{y}");
+			span1.innerHTML = y_format_i < 0 ? options.labelTemplateLat :
+				options.labelTemplateLat.substring(0, y_format_i);
 			this._inputY = this._createInput("inputY", this._inputcontainer);
-			xSpan = L.DomUtil.create("span", "", this._inputcontainer);
+			var x_format_i = options.labelTemplateLng.indexOf("{x}");
+			var span2 = L.DomUtil.create("span", "", this._inputcontainer);
+			span2.innerHTML = (y_format_i < 0 ? " " :
+					options.labelTemplateLat.substring(y_format_i + 3) + " ") +
+				(x_format_i < 0 ? options.labelTemplateLng :
+					options.labelTemplateLng.substring(0, x_format_i));
 			this._inputX = this._createInput("inputX", this._inputcontainer);
+			if(x_format_i >= 0 && options.labelTemplateLng.length > x_format_i + 3) {
+				var span3 = L.DomUtil.create("span", "", this._inputcontainer);
+				span3.innerHTML = options.labelTemplateLng.substring(x_format_i + 3);
+			}
 		} else {
-			xSpan = L.DomUtil.create("span", "", this._inputcontainer);
+			var x_format_i = options.labelTemplateLng.indexOf("{x}");
+			console.log(x_format_i);
+			span1.innerHTML = x_format_i < 0 ? options.labelTemplateLng :
+				options.labelTemplateLng.substring(0, x_format_i);
 			this._inputX = this._createInput("inputX", this._inputcontainer);
-			ySpan = L.DomUtil.create("span", "", this._inputcontainer);
+			var y_format_i = options.labelTemplateLat.indexOf("{y}");
+			var span2 = L.DomUtil.create("span", "", this._inputcontainer);
+			span2.innerHTML = (x_format_i < 0 ? " " :
+					options.labelTemplateLng.substring(x_format_i + 3) + " ") +
+				(y_format_i < 0 ? options.labelTemplateLat :
+					options.labelTemplateLat.substring(0, y_format_i));
 			this._inputY = this._createInput("inputY", this._inputcontainer);
+			span3 = L.DomUtil.create("span", "", this._inputcontainer);
+			if(y_format_i >= 0 && options.labelTemplateLat.length > y_format_i + 3) {
+				var span3 = L.DomUtil.create("span", "", this._inputcontainer);
+				span3.innerHTML = options.labelTemplateLat.substring(y_format_i + 3);
+			}
 		}
-		xSpan.innerHTML = options.labelTemplateLng.replace("{x}", "");
-		ySpan.innerHTML = options.labelTemplateLat.replace("{y}", "");
 
 		L.DomEvent.on(this._inputX, 'keyup', this._handleKeypress, this);
 		L.DomEvent.on(this._inputY, 'keyup', this._handleKeypress, this);
