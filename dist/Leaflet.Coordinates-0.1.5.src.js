@@ -19,6 +19,8 @@ L.Control.Coordinates = L.Control.extend({
 		enableUserInput: true,
 		//use Degree-Minute-Second
 		useDMS: false,
+		//should coordinate be wrapped as on earth
+		wrapCoordinate: true,
 		//if true lat-lng instead of lng-lat label ordering is used
 		useLatLngOrder: false,
 		//if true user given coordinates are centered directly
@@ -256,10 +258,12 @@ L.Control.Coordinates = L.Control.extend({
 	 *	Mousemove callback function updating labels and input elements
 	 */
 	_update: function(evt) {
-		var pos = evt.latlng,
-			opts = this.options;
+		var pos = evt.latlng;
 		if (pos) {
-			pos = pos.wrap();
+			var opts = this.options;
+			if(opts.wrapCoordinate || opts.useDMS) {
+				pos = pos.wrap();
+			}
 			this._currentPos = pos;
 			this._inputY.value = L.NumberFormatter.round(pos.lat, opts.decimals, opts.decimalSeperator);
 			this._inputX.value = L.NumberFormatter.round(pos.lng, opts.decimals, opts.decimalSeperator);
